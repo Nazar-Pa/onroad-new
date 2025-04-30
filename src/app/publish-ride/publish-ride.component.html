@@ -1,0 +1,149 @@
+<div class="publish-container">
+
+  <form class="publish-form" [formGroup]="publishRideForm" (ngSubmit)="onSubmit()">
+
+    <div class="row jcc-aic">
+      <h3>From where to where?</h3>
+      <div class="route">
+
+        <div class="from-to">
+          <select class="from-to-select" formControlName="fromCity">
+            <option class="select-option" label="From where?"
+            [disabled]="true"></option>
+            <option *ngFor="let city of cities" [selected]="publishRideForm.controls['fromCity'].value === city" class="link">{{city}}</option> 
+          </select>
+        </div>
+
+        <div>
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+
+        <div class="from-to">
+          <select class="from-to-select" formControlName="toCity">
+            <option class="select-option" label="To where?"
+            [disabled]="true"></option>
+            <option *ngFor="let city of cities" [selected]="publishRideForm.controls['toCity'].value === city" class="link">{{city}}</option> 
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row jcc-aic">
+      <h3>Number of seats</h3>
+      <div class="number-seats-icons df">
+        <mat-icon (click)="handleClick('subtract')">remove_circle_outline</mat-icon>
+        <input class="seats df" 
+        formControlName="numbOfSeats"
+        [attr.disabled]="true">
+        <mat-icon (click)="handleClick('add')">add_circle_outline</mat-icon>
+      </div>
+    </div>
+
+    <div class="row jcc-aic">
+      <div style="width: 100%;">
+        <div class="col-half">
+          <h3>Date</h3>
+          <div class="date-control-publish">
+            <button class="from-to-select"
+              (click)="showDropCalendar($event)">
+              {{ selected | date:'d MMMM' }}
+            </button>
+            <input formControlName="routeDate"
+            style="display: none;" 
+            [(ngModel)]="selected" [readOnly]="true">
+  
+            <div *ngIf="isDropDownShowing" id="myDropdown" class="col-dropdown-content">
+              <mat-calendar
+              [(selected)]="selected" (selectedChange)="isDropDownShowing = false"></mat-calendar>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-half">
+          <h3>Pick the time</h3>
+  
+          <div class="df jcc-aic">
+            <select class="from-to-select" formControlName="time">
+              <option selected="selected" class="selected">{{timeSlots[3]}}</option>
+              <option *ngFor="let time of timeSlots" class="link">{{time}}</option> 
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row jcc-aic">
+      <div style="width: 100%;">
+
+        <div class="col-half">
+          <h3>Price</h3>
+          <div class="price-control-publish df jcc-aic">
+            <select class="from-to-select" formControlName="price">
+                <option selected="selected" class="selected">{{prices[4]}}</option>
+                <option *ngFor="let price of prices" class="link">{{price}}</option> 
+              </select>
+          </div>
+        </div>
+
+        <div class="col-half">
+            <h3>
+                Brand and model of the car
+            </h3>
+            <!-- <mat-form-field appearance="outline" style="width: 90%;"> -->
+              <input matInput class="car-input"
+                formControlName="carModel"
+                placeholder="Example: Mercedes C-class 2017">
+            <!-- </mat-form-field>             -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row jcc-aic">
+      <div style="width: 100%;">
+
+        <div class="col-half">
+          <h3>Name</h3>
+          <input matInput class="name-phone-input name"
+            formControlName="driverName"
+            placeholder="Driver name">
+        </div>
+
+        <div class="col-half">
+            <h3>
+                Phone number
+            </h3>
+            <input matInput class="name-phone-input"
+              formControlName="phone"
+              placeholder="Phone number">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <mat-accordion class="mat-accordion">
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false"
+                             class="accordion">
+          <mat-expansion-panel-header>
+            <h3>
+              Leave additional note
+            </h3>
+          </mat-expansion-panel-header>
+          <textarea class="text-area" formControlName="note" rows="5" maxlength="230"></textarea>
+          <div id="the-count">
+            <span>{{publishRideForm.controls['note'].value?.length}}</span>
+            <span>/ 230</span>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <div class="submit-btn">
+        <button type="submit" class="submit-btn-content">Publish</button>
+      </div>
+    </div>
+
+    
+  </form>
+</div>

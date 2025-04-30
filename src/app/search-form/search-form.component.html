@@ -1,0 +1,71 @@
+<div *ngIf="defaultFormField; else shortFormField">
+  <form 
+  class="search-form"
+  [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+
+  <div class="fromto df">
+    <select style="font-size: 18px;"
+    formControlName="fromCity">
+      <option class="select-option" label="From where?"
+      [disabled]="true"></option>
+      <option *ngFor="let city of cities" [selected]="searchForm.controls['fromCity'].value === city" class="link">{{city}}</option>
+    </select>
+    <div class="vl"></div>
+  </div>
+
+  <div class="fromto df h40">
+    <select style="font-size: 18px;"
+    formControlName="toCity">
+      <option class="select-option" label="To where?"
+      [disabled]="true"></option>
+      <option *ngFor="let city of cities" [selected]="searchForm.controls['toCity'].value === city" class="link">{{city}}</option>
+    </select>
+    <div class="vl"></div>
+  </div>
+
+  <div class="date-passenger jcc-aic">
+    <div class="date jcc-aic h40">
+      <div class="label" (click)="showDropCalendar()">{{ searchForm.controls['routeDate'].value | date:'d MMMM' }}</div>
+      <input type="text">
+      <div class="vl"></div>
+      <div *ngIf="isDropDownShowing" class="dropdown-content">
+        <mat-calendar [(selected)]="searchForm.controls['routeDate'].value" (selectedChange)="showDropCalendar()"></mat-calendar>
+      </div>
+    </div>
+
+    <!-- <div class="vl"></div> -->
+
+    <div class="passenger jcc-aic h40">
+      <mat-icon (click)="handleClick('subtract')">remove_circle_outline</mat-icon>
+      <input formControlName="numberOfPass" 
+        [value]="searchForm.controls['numberOfPass'].value"
+        [readonly]="true">
+      <mat-icon (click)="handleClick('add')">add_circle_outline</mat-icon>
+    </div>
+  </div>
+  <div class="submit">
+    <input type="submit" class="search rdys2" value="Axtar">
+  </div>
+</form>
+</div>
+
+<ng-template #shortFormField>
+
+  <!-- <div class="search-form"> -->
+    <div class="short-search">
+      <div class="search-form-short" (click)="defaultFormField = true">
+        <div class="jcc-aic">
+          <mat-icon>search</mat-icon>
+          <span class="search-title-route fromto">
+          {{searchForm.controls['fromCity'].value | truncate:7 }} &#8594; {{searchForm.controls['toCity'].value | truncate:7 }}
+          <span class="search-title-route">
+            {{ searchForm.controls['routeDate'].value | date:'d MMMM' }}
+          </span>
+        </span>
+        
+        </div>
+        <button class="changeFltrBtn">axtarisi <br> deyis</button>
+      </div>
+    </div>
+  <!-- </div> -->
+</ng-template>

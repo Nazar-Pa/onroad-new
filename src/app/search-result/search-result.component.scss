@@ -1,0 +1,42 @@
+.search-result {
+  padding: 60px 20px;
+  display: flex;
+
+
+  .search-result-content {
+    position: relative;
+    width: 1020px;
+    margin: 0 auto;
+
+    .result-content {
+      margin: 0 50px;
+      padding-top: 40px;
+    }
+
+    .search-form-content {
+    }
+  }
+}
+
+.short-search-form {
+  display: none;
+}
+
+@media screen and (max-width: 740px) {
+
+  .search-result {
+    padding: 20px 10px;
+
+    .search-result-content {
+  
+      .result-content {
+        margin: 0 10px;
+        padding-top: 20px;
+      }
+    }
+  }
+
+  .short-search-form {
+    display: block;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="search-result">
+  <div class="search-result-content">
+
+    <div class="search-form-content">
+      <app-search-form [formControls]="formControls"></app-search-form>
+    </div>
+
+    <div class="result-content">
+      <h3>Result</h3>
+
+      <app-results 
+        type="search"
+        [routes]="searchedReoutes"></app-results>
+    </div>
+  </div>
+  
+</div>

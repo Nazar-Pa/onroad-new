@@ -1,19 +1,52 @@
 <div class="nav">
-  <div class="nav-content d-flex">
+  <div class="nav-content df">
 
-    <div class="logo-content d-flex">
-      <h2>Bizle<span style="color: red;">Yol</span></h2>
+    <div class="logo-content df" routerLink="/">
+      On<span style="color: red;">Road</span>
     </div>
 
-    <div class="user-login d-flex">
-      <div class="user-login-content d-flex">
-        <a routerLink="search">
-          <div>Search</div>
-          <button>
-            <!-- <mat-icon>search</mat-icon> -->
-          </button>
+      <div class="user-login-content df">
+        <a *ngIf="baseService.showSearchIcon()" class="nav-items jcc-aic" routerLink="search-result">
+          <div class="nav-item search">Search</div>
+          <div class="mat-btn-icon jcc-aic">
+            <mat-icon>search</mat-icon>
+          </div>
         </a>
+
+        <a class="nav-items jcc-aic" routerLink="publish-ride">
+          <div class="nav-item publish">Publish a ride</div>
+          <div class="mat-btn-icon" style="margin-right: 10px;">
+            <mat-icon>add</mat-icon>
+          </div>
+        </a>
+
+        <div class="nav-items df">
+          <ng-container>
+            <div [matMenuTriggerFor]="userMenu" class="jcc-aic">
+              <img src="assets/user.png">
+              <!-- {{showProfileCircle ? user.displayName : ''}} -->
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </div>
+          </ng-container>
+  
+          <ng-template #loginButton>
+            <button mat-button routerLink="login">
+              <mat-icon>login</mat-icon>
+              Login
+            </button>
+          </ng-template>
+        </div>
       </div>
-    </div>
   </div>
 </div>
+
+<div class="top-66">
+  <router-outlet></router-outlet>
+</div>
+
+<mat-menu #userMenu="matMenu" class="jcc-aic" style="background: #fff;">
+  <a mat-menu-item routerLink="publish-ride">Publish a ride</a>
+  <a mat-menu-item routerLink="rides">Elanlarim</a>
+  <a mat-menu-item>Profil</a>
+  <button mat-menu-item>Log out</button>
+</mat-menu>
