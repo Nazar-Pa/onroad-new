@@ -47,12 +47,12 @@ export class SearchFormComponent implements OnInit {
     } else {
       this.paramsExist = true;
       this.defaultFormField = !(window.innerWidth < 740) && this.paramsExist;
-      const { from, to, routeDate, numbOfPass } = this.formControls;
+      const { fromCity, toCity, routeDate, numberOfPass } = this.formControls;
       this.searchForm.patchValue({
-        fromCity: from,
-        toCity: to,
+        fromCity,
+        toCity,
         routeDate: new Date(routeDate),
-        numberOfPass: Number(numbOfPass)
+        numberOfPass
       })
     }
   }

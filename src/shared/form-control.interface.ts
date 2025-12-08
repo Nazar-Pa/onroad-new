@@ -1,6 +1,6 @@
 export interface IFormControl {
-  from: string,
-  to: string,
+  fromCity: string,
+  toCity: string,
   routeDate: Date,
-  numbOfPass: number
+  numberOfPass: number
 }

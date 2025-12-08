@@ -1,8 +1,9 @@
+import { NgFor } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-results',
-  imports: [],
+  imports: [NgFor],
   templateUrl: './results.component.html',
   styleUrl: './results.component.scss'
 })
@@ -14,7 +15,7 @@ export class ResultsComponent implements OnInit {
   page: number = 0;
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    console.log('ResultsComponent on init')
   }
 
   findRoutes() {
