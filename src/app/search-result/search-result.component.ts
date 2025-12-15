@@ -73,7 +73,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
           this.searchForm.patchValue(this.formControls)
           this.routeService.fetchSearchedRoutes(this.formControls, 0, 10)
           .pipe(takeUntil(this.destroy$))
-          .subscribe(result => console.log(result))
+          .subscribe(result => {
+            this.searchedReoutes = result?.content;
+            console.log(result)
+          })
           
         }
       }
@@ -84,15 +87,18 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     if (!this.searchForm.valid) return;
 
     const searchParams = {
-      from: this.searchForm.value.fromCity,  
-      to: this.searchForm.value.toCity,
-      date: this.searchForm.value.routeDate,  
-      numbOfPass: this.searchForm.value.numberOfPass
+      fromCity: this.searchForm.value.fromCity,  
+      toCity: this.searchForm.value.toCity,
+      routeDate: this.searchForm.value.routeDate,  
+      numberOfPass: this.searchForm.value.numberOfPass
     }
 
     console.log('search params', searchParams)
 
-    this.routeService.fetchSearchedRoutes(searchParams).subscribe(res => console.log(res))
+    this.routeService.fetchSearchedRoutes(searchParams).subscribe(res => {
+            this.searchedReoutes = res?.content;
+            console.log(res)
+          })
     
   }
 

@@ -18,9 +18,9 @@ export class RouteService {
   }
 
   fetchSearchedRoutes(searchParams: any, page?: number, size?: number): Observable<any> {
-    const { fromCity, fromTo, routeDate, numberOfPass } = searchParams;
-    console.log(typeof routeDate, routeDate.toLocaleDateString())
-    return this.http.get<any>(`${this.apiUrl}/routes/search?from=${fromCity}&to=${fromTo}&date=${routeDate.toLocaleDateString()}&numbOfPass=${numberOfPass}`)
+    const { fromCity, toCity, routeDate, numberOfPass } = searchParams;
+    // console.log(typeof date, date.toLocaleDateString(), date.toISOString())
+    return this.http.get<any>(`${this.apiUrl}/routes?from=${fromCity}&to=${toCity}&routeDate=${routeDate.toISOString()}&numbOfPass=${numberOfPass}`)
   }
 
   authenticate(requestBody: { email: string, password: string }): Observable<AuthenticationResponse> {

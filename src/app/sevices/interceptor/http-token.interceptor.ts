@@ -35,8 +35,7 @@ const router = inject(Router);
   // return next(authReq);
     return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      // detect expired token from backend
-      if (error.status === 401 && error.error === "TOKEN_EXPIRED") {
+      if (error.status === 401 && (error.error === "TOKEN_EXPIRED" || error.error === "NO_TOKEN")) {
 
         // store the URL the user tried to access
         sessionStorage.setItem("returnUrl", router.url);
