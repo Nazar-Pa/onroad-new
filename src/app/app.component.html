@@ -21,7 +21,7 @@
         </a>
 
         <div class="nav-items df">
-          <ng-container>
+          <ng-container *ngIf="tokenService.isAuthenticated(); else loginButton">
             <div [matMenuTriggerFor]="userMenu" class="jcc-aic">
               <img src="assets/user.png">
               <!-- {{showProfileCircle ? user.displayName : ''}} -->
@@ -31,7 +31,6 @@
   
           <ng-template #loginButton>
             <button mat-button routerLink="login">
-              <mat-icon>login</mat-icon>
               Login
             </button>
           </ng-template>
@@ -48,5 +47,7 @@
   <a mat-menu-item routerLink="publish-ride">Publish a ride</a>
   <a mat-menu-item routerLink="rides">Elanlarim</a>
   <a mat-menu-item>Profil</a>
-  <button mat-menu-item>Log out</button>
+  <button *ngIf="tokenService.isAuthenticated()" mat-menu-item
+  (click)="logout()"
+  >Log out</button>
 </mat-menu>

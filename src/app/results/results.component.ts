@@ -1,20 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-results',
-  imports: [],
+  imports: [NgFor],
   templateUrl: './results.component.html',
   styleUrl: './results.component.scss'
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent implements OnInit, OnChanges {
   
   @Input() routes: any[] = [];
   @Input() type: string = '';
   routesResponse: any = {};
   page: number = 0;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes['routes'])
+    this.routes = changes['routes'].currentValue;
+  }
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    console.log('ResultsComponent on init', this.routes)
   }
 
   findRoutes() {
